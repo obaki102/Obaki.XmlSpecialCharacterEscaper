@@ -1,2 +1,2 @@
 # Obaki.XmlSpecialCharacterEscaper(In-progress)
-This library provides a quick and easy solution for escaping unescaped characters in XML strings. It is a lightweight and simple tool that ensures the reliability of your XML data.
+This library ensure the consistency of your XML data. Featuring a customizable regular expression search, this library helps you escaping unescaped characters in a given XML string.
