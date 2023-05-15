@@ -10,10 +10,16 @@ class Program
     static void Main(string[] args)
     {
         var results = BenchmarkRunner.Run<EscapeBenchmarks>();
+        
+        //dotnet commands
+        //dotnet run --framework net7.0 net6.0 --configuration Release --no-debug
+        //dotnet run --configuration Release --no-debug
     }
 
 }
 
+[SimpleJob(RuntimeMoniker.Net60,baseline:true)]
+[SimpleJob(RuntimeMoniker.Net70)]
 [MemoryDiagnoser]
 public class EscapeBenchmarks
 {
