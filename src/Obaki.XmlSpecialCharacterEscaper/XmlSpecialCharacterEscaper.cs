@@ -12,36 +12,36 @@ internal static class XmlSpecialCharacterEscaper
                 switch (c)
                 {
                     case '&':
-                        if (i + 2 < xmlInput.Length && xmlInput.Substring(i + 1, 2) == "lt")
-                        {
-                            sb.Append("&");
-                            break;
-                        }
-                        if (i + 2 < xmlInput.Length && xmlInput.Substring(i + 1, 2) == "gt")
-                        {
-                            sb.Append("&");
-                            break;
-                        }
-                        if (i + 4 < xmlInput.Length && xmlInput.Substring(i + 1, 4) == "quot")
-                        {
-                            sb.Append("&");
-                            break;
-                        }
-
-                        if (i + 4 < xmlInput.Length && xmlInput.Substring(i + 1, 4) == "apos")
-                        {
-                            sb.Append("&");
-                            break;
-                        }
-
-                        if (i + 3 < xmlInput.Length && xmlInput.Substring(i + 1, 3) == "amp")
-                        {
-                            sb.Append("&");
-                            break;
-                        }
-
-                        sb.Append("&amp;");
+                      if (i + 3 < xmlInput.Length && xmlInput[i + 1] == 'l' && xmlInput[i + 2] == 't' && xmlInput[i + 3] == ';')
+                    {
+                        sb.Append("&");
                         break;
+                    }
+                    if (i + 3 < xmlInput.Length && xmlInput[i + 1] == 'g' && xmlInput[i + 2] == 't' && xmlInput[i + 3] == ';')
+                    {
+                        sb.Append("&");
+                        break;
+                    }
+                    if (i + 5 < xmlInput.Length && xmlInput[i + 1] == 'q' && xmlInput[i + 2] == 'u' && xmlInput[i + 3] == 'o' && xmlInput[i + 4] == 't' && xmlInput[i + 5] == ';')
+                    {
+                        sb.Append("&");
+                        break;
+                    }
+
+                    if (i + 5 < xmlInput.Length && xmlInput[i + 1] == 'a' && xmlInput[i + 2] == 'p' && xmlInput[i + 3] == 'o' && xmlInput[i + 4] == 's' && xmlInput[i + 5] == ';')
+                    {
+                        sb.Append("&");
+                        break;
+                    }
+
+                    if (i + 4 < xmlInput.Length && xmlInput[i + 1] == 'a' && xmlInput[i + 2] == 'm' && xmlInput[i + 3] == 'p' && xmlInput[i + 4] == ';')
+                    {
+                        sb.Append("&");
+                        break;
+                    }
+
+                    sb.Append("&amp;");
+                    break;
                     case '\'':
                          sb.Append("&apos;");
                          break;                    
