@@ -9,6 +9,7 @@ public class EscapeTests
         [InlineData("&lt;", "<")]
         [InlineData("&gt;", ">")]
         [InlineData("&quot;", "\"")]
+        [InlineData("&quot; &amp; &apos; &lt; &gt;", "\" & \' < >")]
     public void Escape_ValidInput_ShouldEscapeSpecialCharacters(string expected, string input)
     {
         //Arrange
@@ -17,6 +18,7 @@ public class EscapeTests
         var result  = test.EscapeXmlSpecialCharacters();
         //Assert
         Assert.Equal(expected, result);
+        Assert.Equal(expected.Length, result.Length);
 
     }
 }
