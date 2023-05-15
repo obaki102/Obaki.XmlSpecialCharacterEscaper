@@ -4,15 +4,21 @@ internal static class XmlSpecialCharacterEscaper
 {
     internal static string Escape(string xmlInput)
     {
+        if(string.IsNullOrEmpty(xmlInput))
+        {
+            throw new ArgumentNullException(nameof(xmlInput));
+        }
+
         StringBuilder sb = new StringBuilder(xmlInput.Length);
-           
-            for (int i = 0; i < xmlInput.Length; i++)
+
+        for (int i = 0; i < xmlInput.Length; i++)
+        {
+            char c = xmlInput[i];
+            switch (c)
             {
-                char c = xmlInput[i];
-                switch (c)
-                {
-                    case '&':
-                      if (i + 3 < xmlInput.Length && xmlInput[i + 1] == 'l' && xmlInput[i + 2] == 't' && xmlInput[i + 3] == ';')
+                case '&':
+                    //Ignore if ampersand is already part of an unescaped character.
+                    if (i + 3 < xmlInput.Length && xmlInput[i + 1] == 'l' && xmlInput[i + 2] == 't' && xmlInput[i + 3] == ';')
                     {
                         sb.Append("&");
                         break;
@@ -42,26 +48,32 @@ internal static class XmlSpecialCharacterEscaper
 
                     sb.Append("&amp;");
                     break;
-                    case '\'':
-                         sb.Append("&apos;");
-                         break;                    
-                    case '\"':
-                         sb.Append("&quot;");
-                         break;
-                    case '<':
-                        sb.Append("&lt;");
-                        break;
-                    case '>':
-                        sb.Append("&gt;");
-                        break;
-                    default:
-                        sb.Append(c);
-                        break;
-                }
-            }
 
-            return sb.ToString();
+                case '\'':
+                        sb.Append("&apos;");
+                        break;    
+
+                case '\"':
+                        sb.Append("&quot;");
+                        break;
+
+                case '<':
+                    sb.Append("&lt;");
+                    break;
+
+                case '>':
+                    sb.Append("&gt;");
+                    break;
+
+                default:
+                    sb.Append(c);
+                    break;
+            }
+        }
+        return sb.ToString();
     }
+
+   
     internal static string Escape(string regexPattern, string xmlxmlInput)
     {
         throw new NotImplementedException();

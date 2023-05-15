@@ -18,8 +18,8 @@ class Program
 
 }
 
-[SimpleJob(RuntimeMoniker.Net60,baseline:true)]
-[SimpleJob(RuntimeMoniker.Net70)]
+// [SimpleJob(RuntimeMoniker.Net60,baseline:true)]
+// [SimpleJob(RuntimeMoniker.Net70)]
 [MemoryDiagnoser]
 public class EscapeBenchmarks
 {
@@ -33,6 +33,14 @@ public class EscapeBenchmarks
 
     [Benchmark]
     public string EscapeUsingDictionary() => Escape3(xmlInput);
+
+    private  static Dictionary<char, string> escapeMap = new Dictionary<char, string> {
+        { '&', "&amp;" },
+        { '\'', "&apos;" },
+        { '\"', "&quot;" },
+        { '<', "&lt;" },
+        { '>', "&gt;" }
+    };
 
     private static string Escape(string xmlInput)
     {
@@ -156,56 +164,24 @@ public class EscapeBenchmarks
             return sb.ToString();
     }
 
-    private static readonly Dictionary<string, string> EscapeSequences = new Dictionary<string, string>
-    {
-        {"lt;", "&lt;"},
-        {"gt;", "&gt;"},
-        {"quot;", "&quot;"},
-        {"apos;", "&apos;"},
-        {"amp;", "&amp;"}
-    };
-
+ 
     private static string Escape3(string xmlInput)
     {
-        StringBuilder sb = new StringBuilder(xmlInput.Length);
+       var sb = new StringBuilder(xmlInput.Length);
 
-        for (int i = 0; i < xmlInput.Length; i++)
+        foreach (var c in xmlInput)
         {
-            char c = xmlInput[i];
-            switch (c)
+            if (escapeMap.TryGetValue(c, out var escapeSeq))
             {
-                case '&':
-                    bool matched = false;
-                    foreach (var escapeSequence in EscapeSequences)
-                    {
-                        if (i + escapeSequence.Key.Length < xmlInput.Length &&
-                            xmlInput.Substring(i + 1, escapeSequence.Key.Length) == escapeSequence.Key)
-                        {
-                            sb.Append("&");
-                            matched = true;
-                            break;
-                        }
-                    }
-                    if (!matched)
-                    {
-                        sb.Append("&amp;");
-                    }
-                    break;
-                case '\'':
-                    sb.Append("&apos;");
-                    break;
-                case '\"':
-                    sb.Append("&quot;");
-                    break;
-                case '<':
-                    sb.Append("&lt;");
-                    break;
-                case '>':
-                    sb.Append("&gt;");
-                    break;
-                default:
-                    sb.Append(c);
-                    break;
+                sb.Append(escapeSeq);
+            }
+            else if (c == '&' && xmlInput.IndexOf(';', sb.Length) - sb.Length < 6)
+            {
+                sb.Append("&");
+            }
+            else
+            {
+                sb.Append(c);
             }
         }
 
