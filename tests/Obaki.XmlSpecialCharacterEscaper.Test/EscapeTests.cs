@@ -10,6 +10,7 @@ public class EscapeTests
         [InlineData("&gt;", ">")]
         [InlineData("&quot;", "\"")]
         [InlineData("&quot; &amp; &apos; &lt; &gt;", "\" & \' < >")]
+          [InlineData("&quot;&quot;", "&quot;\"")]
     public void Escape_ValidInput_ShouldEscapeSpecialCharacters(string expected, string input)
     {
         //Arrange
