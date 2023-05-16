@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 namespace Obaki.XmlSpecialCharacterEscaper;
 internal static class XmlSpecialCharacterEscaper
 {
@@ -17,7 +18,7 @@ internal static class XmlSpecialCharacterEscaper
             switch (c)
             {
                 case '&':
-                    //Ignore if ampersand is already part of an unescaped character.
+                    //Ignore if ampersand is already part of the escaped character.
                     if (i + 3 < xmlInput.Length && xmlInput[i + 1] == 'l' && xmlInput[i + 2] == 't' && xmlInput[i + 3] == ';')
                     {
                         sb.Append("&");
@@ -76,7 +77,17 @@ internal static class XmlSpecialCharacterEscaper
    
     internal static string Escape(string regexPattern, string xmlxmlInput)
     {
-        throw new NotImplementedException();
+         if(string.IsNullOrEmpty(regexPattern))
+        {
+            throw new ArgumentNullException(nameof(regexPattern));
+        }
+        
+         if(string.IsNullOrEmpty(xmlxmlInput))
+        {
+            throw new ArgumentNullException(nameof(xmlxmlInput));
+        }
+
+        return Regex.Replace(xmlxmlInput, regexPattern, match => Escape(match.Value));
     }
 
 }
