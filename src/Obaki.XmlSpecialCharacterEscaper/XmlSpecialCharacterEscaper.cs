@@ -75,19 +75,19 @@ internal static class XmlSpecialCharacterEscaper
     }
 
    
-    internal static string Escape(string regexPattern, string xmlxmlInput)
+    internal static string Escape( string xmlString,string regexPattern)
     {
          if(string.IsNullOrEmpty(regexPattern))
         {
             throw new ArgumentNullException(nameof(regexPattern));
         }
         
-         if(string.IsNullOrEmpty(xmlxmlInput))
+         if(string.IsNullOrEmpty(xmlString))
         {
-            throw new ArgumentNullException(nameof(xmlxmlInput));
+            throw new ArgumentNullException(nameof(xmlString));
         }
 
-        return Regex.Replace(xmlxmlInput, regexPattern, match => Escape(match.Value));
+        return Regex.Replace(xmlString, regexPattern, match => Escape(match.Value));
     }
 
 }
