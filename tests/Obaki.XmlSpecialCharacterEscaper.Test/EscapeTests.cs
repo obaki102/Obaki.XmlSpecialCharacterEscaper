@@ -13,8 +13,10 @@ public class EscapeTests
     {
         //Arrange
         string test = input;
+
         //Act
         var result = test.Escape();
+
         //Assert
         Assert.Equal(expected, result);
         Assert.Equal(expected.Length, result.Length);
@@ -31,6 +33,7 @@ public class EscapeTests
 
         //Act
         var result = test.Escape(regexPattern);
+
         //Assert
         Assert.Equal(expected, result);
 
@@ -57,6 +60,7 @@ public class EscapeTests
     {
         //Arrange
         string regexPattern = @"((?="")";
+
         //Act
         var action = new Action(() => input.Escape(regexPattern));
 

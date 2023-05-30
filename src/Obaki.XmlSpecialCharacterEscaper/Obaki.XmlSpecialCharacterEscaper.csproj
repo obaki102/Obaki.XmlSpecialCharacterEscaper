@@ -1,9 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+		<Title>Obaki.XmlSpecialCharacterEscaper</Title>
+		<Version>0.0.1</Version>
+		<Authors>obaki102</Authors>
+		<Company>obaki102</Company>
+		<Description>Obaki.XmlSpecialCharacterEscaper is a simple library that escapes all unescaped characters in a given XML string.</Description>
+		<PackageId>Obaki.LocalStorageCache</PackageId>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/obaki102/Obaki.XmlSpecialCharacterEscaper</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>

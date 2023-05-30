@@ -13,8 +13,10 @@ public class EscapeAsyncTests
     {
         //Arrange
         string test = input;
+
         //Act
         var result = await test.EscapeAsync();
+
         //Assert
         Assert.Equal(expected, result);
         Assert.Equal(expected.Length, result.Length);
@@ -31,6 +33,7 @@ public class EscapeAsyncTests
 
         //Act
         var result = await test.EscapeAsync(regexPattern);
+
         //Assert
         Assert.Equal(expected, result);
 
@@ -57,6 +60,7 @@ public class EscapeAsyncTests
     {
         //Arrange
         string regexPattern = @"((?="")";
+
         //Act
         var function = new Func<Task>(async ()  => await input.EscapeAsync(regexPattern));
 
