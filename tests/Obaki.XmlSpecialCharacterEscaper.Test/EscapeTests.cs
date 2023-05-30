@@ -1,6 +1,4 @@
-using Obaki.XmlSpecialCharacterEscaper;
 namespace Obaki.XmlSpecialCharacterEscaper.Test;
-
 public class EscapeTests
 {
     [Theory]
@@ -36,5 +34,61 @@ public class EscapeTests
         //Assert
         Assert.Equal(expected, result);
 
+    }
+
+    [Theory]
+    [InlineData("  ")]
+    [InlineData(null)]
+    [InlineData("")]
+    public void Escape_InValidInput_ShouldThrowNullArgumentExceptionError(string input)
+    {
+        //Act
+        var action = new Action(() => input.Escape());
+
+        //Assert
+        Assert.Throws<ArgumentNullException>(action);
+    }
+
+    [Theory]
+    [InlineData("  ")]
+    [InlineData(null)]
+    [InlineData("")]
+    public void EscapeWithRegex_InValidInput_ValidRegexPattern_ShouldThrowNullArgumentExceptionError(string input)
+    {
+        //Arrange
+        string regexPattern = @"((?="")";
+        //Act
+        var action = new Action(() => input.Escape(regexPattern));
+
+        //Assert
+        Assert.Throws<ArgumentNullException>(action);
+    }
+
+    [Theory]
+    [InlineData("??<=Value\\s*=\\s*\")([^\"]*)")]
+    public void EscapeWithRegex_InValidInput_ValidRegexPattern_ShouldThrowArgumentExceptionError(string regexPattern)
+    {
+        //Arrange
+        string test = "<root test=\"test1\"></root>";
+
+        var action = new Action(() => test.Escape(regexPattern));
+
+        //Assert
+        Assert.Throws<ArgumentException>(action);
+    }
+
+    [Theory]
+    [InlineData("  ")]
+    [InlineData(null)]
+    [InlineData("")]
+    public void EscapeWithRegex_ValidInput_EmptyRegexPattern_ShouldThrowNullArgumentExceptionError(string regexPattern)
+    {
+        //Arrange
+        string test = "<root test=\"test1\"></root>";
+
+        var action = new Action(() => test.Escape(regexPattern));
+
+        //Assert
+        Assert.Throws<ArgumentNullException>(action);
     }
 }

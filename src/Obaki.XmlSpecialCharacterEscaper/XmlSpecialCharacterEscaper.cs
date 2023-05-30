@@ -5,7 +5,7 @@ internal static class XmlSpecialCharacterEscaper
 {
     internal static string Escape(string xmlInput)
     {
-        if(string.IsNullOrEmpty(xmlInput))
+        if (string.IsNullOrWhiteSpace(xmlInput))
         {
             throw new ArgumentNullException(nameof(xmlInput));
         }
@@ -51,12 +51,12 @@ internal static class XmlSpecialCharacterEscaper
                     break;
 
                 case '\'':
-                        sb.Append("&apos;");
-                        break;    
+                    sb.Append("&apos;");
+                    break;
 
                 case '\"':
-                        sb.Append("&quot;");
-                        break;
+                    sb.Append("&quot;");
+                    break;
 
                 case '<':
                     sb.Append("&lt;");
@@ -74,20 +74,45 @@ internal static class XmlSpecialCharacterEscaper
         return sb.ToString();
     }
 
-   
-    internal static string Escape( string xmlString,string regexPattern)
+    internal static string Escape(string xmlString, string regexPattern)
     {
-         if(string.IsNullOrEmpty(regexPattern))
+        if (string.IsNullOrWhiteSpace(regexPattern))
         {
             throw new ArgumentNullException(nameof(regexPattern));
         }
-        
-         if(string.IsNullOrEmpty(xmlString))
+
+        if (string.IsNullOrWhiteSpace(xmlString))
         {
             throw new ArgumentNullException(nameof(xmlString));
         }
 
-        return Regex.Replace(xmlString, regexPattern, match => Escape(match.Value));
+        try
+        {
+            return Regex.Replace(xmlString, regexPattern, match => Escape(match.Value));
+        }
+        catch (ArgumentException ex)
+        {
+            throw new ArgumentException(ex.Message);
+        }
     }
 
+    internal static async Task<string> EscapeAsync(string xmlInput)
+    {
+        return await Task.Run(() => Escape(xmlInput));
+    }
+
+    internal static async Task<string> EscapeAsync(string xmlString, string regexPattern)
+    {
+        if (string.IsNullOrEmpty(regexPattern))
+        {
+            throw new ArgumentNullException(nameof(regexPattern));
+        }
+
+        if (string.IsNullOrEmpty(xmlString))
+        {
+            throw new ArgumentNullException(nameof(xmlString));
+        }
+
+        return await Task.Run(() => Regex.Replace(xmlString, regexPattern, match => Escape(match.Value)));
+    }
 }
