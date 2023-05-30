@@ -6,13 +6,13 @@ public static class XmlSpecialCharacterEscaperExtensions
         => XmlSpecialCharacterEscaper.Escape(xmlString);
     
     public static string Escape(this string xmlString, string regexPattern)
-        => XmlSpecialCharacterEscaper.Escape(xmlString, regexPattern);
+        => XmlSpecialCharacterEscaper.EscapeWithRegex(xmlString, regexPattern);
 
     public static async Task<string> EscapeAsync(this string xmlString)
        => await XmlSpecialCharacterEscaper.EscapeAsync(xmlString);
 
     public static async Task<string> EscapeAsync(this string xmlString, string regexPattern)
-        => await XmlSpecialCharacterEscaper.EscapeAsync(xmlString, regexPattern);
+        => await XmlSpecialCharacterEscaper.EscapeWithRegexAsync(xmlString, regexPattern);
 
 
 }

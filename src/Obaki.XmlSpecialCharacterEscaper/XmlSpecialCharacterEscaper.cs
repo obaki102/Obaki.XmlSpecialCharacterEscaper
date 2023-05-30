@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 namespace Obaki.XmlSpecialCharacterEscaper;
-public static class XmlSpecialCharacterEscaper
+internal static class XmlSpecialCharacterEscaper
 {
-    public static string Escape(string xmlString)
+    internal static string Escape(string xmlString)
     {
         if (string.IsNullOrWhiteSpace(xmlString))
         {
@@ -74,7 +74,7 @@ public static class XmlSpecialCharacterEscaper
         return sb.ToString();
     }
 
-    public static string Escape(string xmlString, string regexPattern)
+    internal static string EscapeWithRegex(string xmlString, string regexPattern)
     {
         if (string.IsNullOrWhiteSpace(regexPattern))
         {
@@ -97,12 +97,12 @@ public static class XmlSpecialCharacterEscaper
         }
     }
 
-    public static async Task<string> EscapeAsync(string xmlString)
+    internal static async Task<string> EscapeAsync(string xmlString)
     {
         return await Task.Run(() => Escape(xmlString));
     }
 
-    public static async Task<string> EscapeAsync(string xmlString, string regexPattern)
+    internal static async Task<string> EscapeWithRegexAsync(string xmlString, string regexPattern)
     {
         if (string.IsNullOrEmpty(regexPattern))
         {
