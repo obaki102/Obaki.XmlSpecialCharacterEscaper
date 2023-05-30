@@ -24,12 +24,15 @@ public class EscapeAsyncTests
     }
 
     [Theory]
-    [InlineData("<tag Value=\" &gt;\"", "<tag Value=\" >\"")]
+    [InlineData("<tag Value=\" &gt;\"/>", "<tag Value=\" >\"/>")]
+    [InlineData("<tag Value=\" &lt;\"/>", "<tag Value=\" <\"/>")]
+    [InlineData("<root value=\"&quot; &amp; &amp; &amp; &amp; &amp; \"/>", "<root value=\"\" & & & & & \"/>")]
+    [InlineData("<tag>&quot;&apos; &amp; &amp; &amp; &apos; &lt; &gt; &lt;&gt; </tag>", "<tag>\"' & & & ' < > <> </tag>")]
     public async Task EscapeAsyncWithRegex_ValidInput_ShouldEscapeAsyncSpecialCharacters(string expected, string input)
     {
         //Arrange
         string test = input;
-        string regexPattern = @"(?<=Value\s*=\s*"")([^""]*)(?="")";
+        string regexPattern = @"(?<=(<(\w+)>))(?<value>.*?)(?=(</(\w+)>))|(?<=(\s*=\s*['""]))(?<value>.*?)(?=(?:['""]\s*/>|['""]\s*\w+\s*=\s*))";
 
         //Act
         var result = await test.EscapeAsync(regexPattern);

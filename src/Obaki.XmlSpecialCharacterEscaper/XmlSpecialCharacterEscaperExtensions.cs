@@ -8,11 +8,11 @@ public static class XmlSpecialCharacterEscaperExtensions
     public static string Escape(this string xmlString, string regexPattern)
         => XmlSpecialCharacterEscaper.Escape(xmlString, regexPattern);
 
-    public static Task<string> EscapeAsync(this string xmlString)
-       => XmlSpecialCharacterEscaper.EscapeAsync(xmlString);
+    public static async Task<string> EscapeAsync(this string xmlString)
+       => await XmlSpecialCharacterEscaper.EscapeAsync(xmlString);
 
-    public static Task<string> EscapeAsync(this string xmlString, string regexPattern)
-        => XmlSpecialCharacterEscaper.EscapeAsync(xmlString, regexPattern);
+    public static async Task<string> EscapeAsync(this string xmlString, string regexPattern)
+        => await XmlSpecialCharacterEscaper.EscapeAsync(xmlString, regexPattern);
 
 
 }

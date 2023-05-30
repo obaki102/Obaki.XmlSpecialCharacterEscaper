@@ -10,7 +10,7 @@
 		<Authors>obaki102</Authors>
 		<Company>obaki102</Company>
 		<Description>Obaki.XmlSpecialCharacterEscaper is a simple library that escapes all unescaped characters in a given XML string.</Description>
-		<PackageId>Obaki.LocalStorageCache</PackageId>
+		<PackageId>Obaki.XmlSpecialCharacterEscaper</PackageId>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/obaki102/Obaki.XmlSpecialCharacterEscaper</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>

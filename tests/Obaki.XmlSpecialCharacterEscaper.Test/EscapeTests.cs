@@ -24,12 +24,15 @@ public class EscapeTests
     }
 
     [Theory]
-    [InlineData("<tag Value=\" &gt;\"", "<tag Value=\" >\"")]
+    [InlineData("<tag Value=\" &gt;\"/>", "<tag Value=\" >\"/>")]
+    [InlineData("<tag Value=\" &lt;\"/>", "<tag Value=\" <\"/>")]
+    [InlineData("<root value=\"&quot; &amp; &amp; &amp; &amp; &amp; \"/>", "<root value=\"\" & & & & & \"/>")]
+    [InlineData("<tag>&quot;&apos; &amp; &amp; &amp; &apos; &lt; &gt; &lt;&gt; </tag>", "<tag>\"' & & & ' < > <> </tag>")]
     public void EscapeWithRegex_ValidInput_ShouldEscapeSpecialCharacters(string expected, string input)
     {
         //Arrange
         string test = input;
-        string regexPattern = @"(?<=Value\s*=\s*"")([^""]*)(?="")";
+        string regexPattern = @"(?<=(<(\w+)>))(?<value>.*?)(?=(</(\w+)>))|(?<=(\s*=\s*['""]))(?<value>.*?)(?=(?:['""]\s*/>|['""]\s*\w+\s*=\s*))";
 
         //Act
         var result = test.Escape(regexPattern);
@@ -38,6 +41,7 @@ public class EscapeTests
         Assert.Equal(expected, result);
 
     }
+
 
     [Theory]
     [InlineData("  ")]
