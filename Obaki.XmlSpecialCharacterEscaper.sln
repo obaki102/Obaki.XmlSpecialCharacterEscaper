@@ -5,21 +5,18 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0002406E-63A1-498A-8576-CCB41BE4842A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obaki.XmlSpecialCharacterEscaper", "src\Obaki.XmlSpecialCharacterEscaper\Obaki.XmlSpecialCharacterEscaper.csproj", "{6776FC7D-2AF1-4552-BFEA-725F463713B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obaki.XmlSpecialCharacterEscaper", "src\Obaki.XmlSpecialCharacterEscaper\Obaki.XmlSpecialCharacterEscaper.csproj", "{6776FC7D-2AF1-4552-BFEA-725F463713B5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2D1D00A1-BAC9-45FC-94D0-7D9072767A14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obaki.XmlSpecialCharacterEscaper.Test", "tests\Obaki.XmlSpecialCharacterEscaper.Test\Obaki.XmlSpecialCharacterEscaper.Test.csproj", "{E03A6688-9766-42DE-AD29-4BDDDD6487AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obaki.XmlSpecialCharacterEscaper.Test", "tests\Obaki.XmlSpecialCharacterEscaper.Test\Obaki.XmlSpecialCharacterEscaper.Test.csproj", "{E03A6688-9766-42DE-AD29-4BDDDD6487AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obaki.XmlSpecialCharacterEscaper.Benchmark", "tests\Obaki.XmlSpecialCharacterEscaper.Benchmark\Obaki.XmlSpecialCharacterEscaper.Benchmark.csproj", "{1383E2E1-ED78-4CBF-9E1E-EC033A3EA626}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obaki.XmlSpecialCharacterEscaper.Benchmark", "tests\Obaki.XmlSpecialCharacterEscaper.Benchmark\Obaki.XmlSpecialCharacterEscaper.Benchmark.csproj", "{1383E2E1-ED78-4CBF-9E1E-EC033A3EA626}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6776FC7D-2AF1-4552-BFEA-725F463713B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -35,9 +32,15 @@ Global
 		{1383E2E1-ED78-4CBF-9E1E-EC033A3EA626}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1383E2E1-ED78-4CBF-9E1E-EC033A3EA626}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6776FC7D-2AF1-4552-BFEA-725F463713B5} = {0002406E-63A1-498A-8576-CCB41BE4842A}
 		{E03A6688-9766-42DE-AD29-4BDDDD6487AF} = {2D1D00A1-BAC9-45FC-94D0-7D9072767A14}
 		{1383E2E1-ED78-4CBF-9E1E-EC033A3EA626} = {2D1D00A1-BAC9-45FC-94D0-7D9072767A14}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3BE66FF-CDAA-4C09-B221-FD61E2F94E62}
 	EndGlobalSection
 EndGlobal

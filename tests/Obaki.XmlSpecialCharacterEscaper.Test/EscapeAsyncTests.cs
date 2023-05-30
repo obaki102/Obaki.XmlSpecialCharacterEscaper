@@ -28,6 +28,7 @@ public class EscapeAsyncTests
     [InlineData("<tag Value=\" &lt;\"/>", "<tag Value=\" <\"/>")]
     [InlineData("<root value=\"&quot; &amp; &amp; &amp; &amp; &amp; \"/>", "<root value=\"\" & & & & & \"/>")]
     [InlineData("<tag>&quot;&apos; &amp; &amp; &amp; &apos; &lt; &gt; &lt;&gt; </tag>", "<tag>\"' & & & ' < > <> </tag>")]
+    [InlineData("<AMS Value  = \"Glaser&quot;-Focused HD\" Verb=\"\" Asset_ID = \"test  &quot;  \" Asset_Name=\"test_&quot;Glaser&quot;-FocusedT\" Creation_Date=\"2022-02-10\" Description=\"&quot;Glaser&quot;-Focused--title--\" Product=\"MOD\" Provider=\"HD\" Provider_ID=\".com\" Name=\"Title_Brief\" Value=\"&quot;Glaser&quot;-Focused HD\"  />", "<AMS Value  = \"Glaser\"-Focused HD\" Verb=\"\" Asset_ID = \"test  \"  \" Asset_Name=\"test_\"Glaser\"-FocusedT\" Creation_Date=\"2022-02-10\" Description=\"\"Glaser\"-Focused--title--\" Product=\"MOD\" Provider=\"HD\" Provider_ID=\".com\" Name=\"Title_Brief\" Value=\"\"Glaser\"-Focused HD\"  />")]
     public async Task EscapeAsyncWithRegex_ValidInput_ShouldEscapeAsyncSpecialCharacters(string expected, string input)
     {
         //Arrange

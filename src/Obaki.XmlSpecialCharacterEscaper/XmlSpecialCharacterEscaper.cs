@@ -74,7 +74,7 @@ internal static class XmlSpecialCharacterEscaper
         return sb.ToString();
     }
 
-    internal static string EscapeWithRegex(string xmlString, string regexPattern)
+    internal static string Escape(string xmlString, string regexPattern)
     {
         if (string.IsNullOrWhiteSpace(regexPattern))
         {
@@ -88,7 +88,17 @@ internal static class XmlSpecialCharacterEscaper
 
         try
         {
-            return Regex.Replace(xmlString, regexPattern, match => Escape(match.Value));
+            return Regex.Replace(xmlString, regexPattern, match =>
+            {
+                if (!string.IsNullOrWhiteSpace(match.Value))
+                {
+                    return Escape(match.Value);
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            });
 
         }
         catch (ArgumentException ex)
@@ -102,7 +112,8 @@ internal static class XmlSpecialCharacterEscaper
         return await Task.Run(() => Escape(xmlString));
     }
 
-    internal static async Task<string> EscapeWithRegexAsync(string xmlString, string regexPattern)
+    //TODO: Deep dive on how to implement the async version correctly or is it even necessary to use it.
+    internal static async Task<string> EscapeAsync(string xmlString, string regexPattern)
     {
         if (string.IsNullOrEmpty(regexPattern))
         {
@@ -114,6 +125,6 @@ internal static class XmlSpecialCharacterEscaper
             throw new ArgumentNullException($"{nameof(xmlString)} should not be empty");
         }
 
-        return await Task.Run(() => Regex.Replace(xmlString, regexPattern, match => Escape(match.Value)));
+        return await Task.Run(() => Escape(xmlString, regexPattern));
     }
 }
