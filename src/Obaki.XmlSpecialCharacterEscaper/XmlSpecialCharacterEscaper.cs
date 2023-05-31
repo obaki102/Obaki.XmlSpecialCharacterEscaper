@@ -90,7 +90,7 @@ internal static class XmlSpecialCharacterEscaper
         {
             return Regex.Replace(xmlString, regexPattern, match =>
             {
-                if (!string.IsNullOrWhiteSpace(match.Value))
+                if (!string.IsNullOrEmpty(match.Value))
                 {
                     return Escape(match.Value);
                 }
